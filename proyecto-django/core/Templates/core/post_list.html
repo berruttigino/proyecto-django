@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Posts{% endblock %}
+
+{% block content %}
+<h1>Posts publicados</h1>
+<a href="{% url 'core:post-create' %}">+ Nuevo post</a>
+<ul>
+    {% for post in posts %}
+        <li>
+            <h2><a href="{% url 'core:post-detail' post.pk %}">{{ post.title|upper }}</a></h2>
+            <p>{{ post.content }}</p>
+            <small>{{ post.published_date }}</small>
+            <br>
+            <a href="{% url 'core:post-update' post.pk %}">Editar</a> |
+            <a href="{% url 'core:post-delete' post.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay posts publicados todavía.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

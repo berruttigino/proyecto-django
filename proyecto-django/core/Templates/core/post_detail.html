@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <small>Publicado el {{ post.published_date }}</small>
+    <br>
+    <a href="{% url 'core:post-list' %}">Volver a la lista</a>
+</body>
+</html>
