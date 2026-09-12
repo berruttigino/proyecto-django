@@ -39,6 +39,7 @@ class PostDeleteView(DeleteView):
     success_url = reverse_lazy('core:post-list')
 
 
+# Vista que muestra únicamente los posts marcados como destacados y publicados
 class PostFeaturedListView(ListView):
     model = Post
     template_name = 'core/post_list.html'
