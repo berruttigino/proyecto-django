@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Post
+from .forms import PostSearchForm
 
 
 class PostListView(ListView):
@@ -10,7 +11,16 @@ class PostListView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.filter(publicado=True).order_by('-published_date')
+        queryset = Post.objects.filter(publicado=True).order_by('-published_date')
+        q = self.request.GET.get('q', '')
+        if q:
+            queryset = queryset.filter(title__icontains=q)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PostSearchForm(self.request.GET or None)
+        return context
 
 
 class PostDetailView(DetailView):

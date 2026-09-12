@@ -1,10 +1,15 @@
 {% extends 'core/base.html' %}
-
 {% block title %}Lista de Posts{% endblock %}
 
 {% block content %}
 <h1>Posts publicados</h1>
 <a href="{% url 'core:post-create' %}">+ Nuevo post</a>
+
+<form method="get" style="margin: 1em 0;">
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
 <ul>
     {% for post in posts %}
         <li>
